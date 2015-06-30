@@ -15,6 +15,7 @@ module Spree
 
           ::ActiveShipping::FedEx.new(carrier_details)
         end
+
       end
     end
   end

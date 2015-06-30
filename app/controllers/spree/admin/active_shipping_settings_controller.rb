@@ -2,7 +2,7 @@ class Spree::Admin::ActiveShippingSettingsController < Spree::Admin::BaseControl
 
   def edit
     @preferences_UPS = [:ups_login, :ups_password, :ups_key, :shipper_number]
-    @preferences_FedEx = [:fedex_login, :fedex_password, :fedex_account, :fedex_key]
+    @preferences_FedEx = [:fedex_login, :fedex_password, :fedex_account, :fedex_key, :fedex_signature_threshold, :fedex_signature_type]
     @preferences_USPS = [:usps_login]
     @preferences_CanadaPost = [:canada_post_login]
     @preferences_GeneralSettings = [:units, :unit_multiplier, :default_weight, :handling_fee, 

@@ -9,6 +9,8 @@ class Spree::ActiveShippingConfiguration < Spree::Preferences::Configuration
   preference :fedex_password, :string, :default => "special_sha1_looking_thing_sent_via_email"
   preference :fedex_account, :string, :default => "account_no"
   preference :fedex_key, :string, :default => "authorization_key"
+  preference :fedex_signature_threshold, :decimal, :default => 0.0
+  preference :fedex_signature_type, :string, :default => nil
 
   preference :usps_login, :string, :default => "aunt_judy"
 

@@ -22,6 +22,9 @@ module SpreeActiveShippingExtension
 
       # Fix Canada Post "Ready to ship" package
       ActiveShipping::CanadaPost.send(:include, Spree::ActiveShipping::CanadaPostOverride)
+
+      # Support signature option in Fedex rate request
+      ActiveShipping::FedEx.send(:include, Spree::ActiveShipping::FedExOverride)
     end
 
     config.autoload_paths += %W(#{config.root}/lib)
