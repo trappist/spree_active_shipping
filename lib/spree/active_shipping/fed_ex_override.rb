@@ -8,7 +8,7 @@ module Spree
           def shipping_options(package)
             if signature_type = Spree::ActiveShipping::Config[:fedex_signature_type]
               if signature_threshold = Spree::ActiveShipping::Config[:fedex_signature_threshold]
-                if signature_threshold > 0 and signature_threshold < package.order.total
+                if signature_threshold > 0 and signature_threshold < package.value
                   return {signature_option: signature_type.to_sym}
                 end
               end
@@ -17,12 +17,12 @@ module Spree
           end
 
           def build_packages_nodes(xml, packages, imperial)
-            puts '========='
-            puts "#{packages.size} packages"
-            puts '========='
             packages.map do |pkg|
               xml.RequestedPackageLineItems do
+                xml.GroupPackageCount(1)
                 options = shipping_options(pkg)
+                build_package_weight_node(xml, pkg, imperial)
+                build_package_dimensions_node(xml, pkg, imperial)
                 if options.has_key?(:signature_option)
                   xml.SpecialServicesRequested do
                     xml.SpecialServiceTypes("SIGNATURE_OPTION")
@@ -31,9 +31,7 @@ module Spree
                     end
                   end
                 end
-                xml.GroupPackageCount(1)
-                build_package_weight_node(xml, pkg, imperial)
-                build_package_dimensions_node(xml, pkg, imperial)
+
               end
             end
           end
